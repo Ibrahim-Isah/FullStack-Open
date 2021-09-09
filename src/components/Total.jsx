@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Total = ({parts}) => {
+const Total = ({course}) => {
     return (
         <div>
-            {parts.map(item => "Excesrce " + item.exercises + " ")}
+            {course.map(item => "Excesrce " + item.exercises + " ")}
         </div>
     )
 }

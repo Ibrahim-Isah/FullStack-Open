@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Content = ({parts}) => {
+const Content = ({course}) => {
     return (
         <div>
-            {parts.map(item => <p key={item.name}>{item.name}</p>)}
+            {course.map(item => <p key={item.name}>{item.name}</p>)}
         </div>
     )
 }
