@@ -14,19 +14,17 @@ const FirstProject = () => {
         getCourse()
         .then(items => {
             if(mounted){
-                setSubject(items)
-                setCourse(items)
+                setSubject(items.name)
+                setCourse(items.parts)
             }
         })
         return () => mounted = false
     }, [])
-
-    console.log("list of course", getCourse())
     return (
         <div>
-            <Header course={subject} />
-            <Content parts={course} />
-            <Total parts={course} />
+            <Header subject={subject} />
+            <Content course={course} />
+            <Total course={course} />
             <Test />
         </div>
     )
