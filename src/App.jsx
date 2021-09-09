@@ -6,7 +6,8 @@ import Feedback from './projects/Feedback'
 const App = () => {
   return (
     <div>
-      <FirstProject />
+      {/* <FirstProject /> */}
+      <Feedback />
     </div>
   )
 }
