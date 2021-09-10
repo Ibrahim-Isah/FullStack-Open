@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 const Anecdotes = () => {
     const anecdotes = [
@@ -10,18 +10,39 @@ const Anecdotes = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
     ]
-   
-    const [selected, setSelected] = useState(0);
 
+    const randomNum = Math.floor(Math.random() * anecdotes.length);
+
+    const [selected, setSelected] = useState(0);
+    const [points , setPoints] = useState(Array(anecdotes.length).fill(0));
+    const [mostVoted , setMostVoted] = useState(0);
+
+    
+    
     const handleClick = () => {
-        let randomNum = Math.floor(Math.random() * anecdotes.length);
-        setSelected(randomNum)
+        setSelected(randomNum);
     }
+
+    const handleVote = () => {
+        const copy = {...points}
+        copy[selected] += 1;
+        setPoints(copy)
+
+        if(points[selected] > points[mostVoted]){
+            setMostVoted(selected)
+        }
+    }
+
     
     return (
         <div>
-            {anecdotes[selected]}
+            {anecdotes[selected]} <br /> 
+            <p>has {points[selected]} votes</p>
             <button onClick={handleClick}>next anecdotes</button>
+            <button onClick={handleVote}>vote</button>
+
+            <h2>Most Voted</h2>
+            <p>{anecdotes[mostVoted]}</p>
         </div>
     )
 }
