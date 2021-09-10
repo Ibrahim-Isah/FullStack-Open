@@ -1,15 +1,11 @@
 import React from 'react'
 import './App.css'
-import FirstProject from './projects/FirstProject'
-import Feedback from './projects/Feedback'
-import Anecdotes from './projects/Anecdotes'
+import PartOne from './chapters/PartOne'
 
 const App = () => {
   return (
     <div>
-      {/* <FirstProject /> */}
-      {/* <Feedback /> */}
-      <Anecdotes />
+      <PartOne />
     </div>
   )
 }
