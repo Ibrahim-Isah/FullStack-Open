@@ -4,11 +4,13 @@ const Statistics = ({good, bad, neutral, feedback , average}) => {
     return (
             <div>
                 <table>
-                    <StatisticsLine text="Good" value={good}/>
-                    <StatisticsLine text="Neutral" value={neutral}/>
-                    <StatisticsLine text="Bad" value={bad}/>
-                    <StatisticsLine text="Average" value={average}/>
-                    <StatisticsLine text="Feedback" value={feedback + "%"}/>
+                    <tbody>
+                        <StatisticsLine text="Good" value={good}/>
+                        <StatisticsLine text="Neutral" value={neutral}/>
+                        <StatisticsLine text="Bad" value={bad}/>
+                        <StatisticsLine text="Average" value={average}/>
+                        <StatisticsLine text="Feedback" value={feedback + "%"}/>
+                    </tbody>
                 </table>
             </div>
     )
