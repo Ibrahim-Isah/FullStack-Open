@@ -1,20 +1,23 @@
 import React from 'react'
+import Country from './Country'
 
-const Content = ({countries}) => {
-    if(countries.length < 10){
+const Content = ({countries , setCountries}) => {
+    if(countries.length > 10){
         return (
             <div>
-                <ul>
-                    {countries.map((country , i) => <li key={country[i]}>{country.name}</li>)}
-                </ul>
-                {console.log(countries.name)}
+                Too many Countries
             </div>
         )
-    } else {
+    } else if((countries.length > 2 && countries.length < 10) || countries.length === 0) {
         return (
             <div>
-                Too many countries
+                {countries.map((country , i) => <li key={country[i]}>{country.name}<button onClick={() => setCountries([country])}>show</button></li>)}
             </div>
+        )
+        
+    } else {
+        return(
+            <Country country={countries[0]}/>
         )
     }
     

@@ -22,14 +22,17 @@ const Countries = () => {
     const handleFilter = (e) => {
         e.preventDefault();
         setFiltering(e.target.value)
-        const regex = new RegExp(filtering , 'i');
-        const filteredCountries = () => allCountries.filter(country => country.name.match(regex));
-        setCountries(filteredCountries)
+        if(filtering){
+            const regex = new RegExp(filtering , 'i');
+            const filteredCountries = () => allCountries.filter(country => country.name.match(regex));
+            setCountries(filteredCountries)
+        }
+        
     }
     return (
         <div>
             <Filter value={filtering} onChange={handleFilter}/>
-            <Content countries={countries}/>
+            <Content countries={countries} setCountries={setCountries}/>
         </div>
     )
 }
