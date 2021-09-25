@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios'
 import Note from '../components/Note'
 import { getNotes } from '../services/courses';
 
@@ -17,6 +18,16 @@ const Notes = () => {
         return () => mounted = false;    
     }, []);
 
+    const toggleImportanceOf = (id) => {
+        const url = `http://localhost:3001/notes/${id}`
+        const note = notes.find(n => n.id === id)
+        const changedNote = { ...note, important: !note.important }
+
+        axios.put(url, changedNote).then(response => {
+            setNotes(notes.map(note => note.id !== id ? note : response.data))
+        })
+    }
+    
     const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
 
     const addNote = (event) => {
@@ -25,11 +36,18 @@ const Notes = () => {
             content: newNote,
             date: new Date().toISOString(),
             important: Math.random() < 0.5,
-            id: notes.length + 1,
+            //  id: notes.length + 1,
         }
 
-        setNotes(notes.concat(noteObject));
-        setNewNote("")
+        axios
+            .post('http://localhost:3001/notes', noteObject)
+            .then(response => {
+                setNotes(notes.concat(response.data))
+                setNewNote('')
+            })
+
+        // setNotes(notes.concat(noteObject));
+        // setNewNote("")
     }
 
     const handleNoteChange = (event) => {
@@ -43,7 +61,11 @@ const Notes = () => {
             <button onClick={() => setShowAll(!showAll)}>show {showAll ? 'important' : 'all'}</button>
             <ul>
                 {notesToShow.map(note => 
-                    <Note key={note.id} note={note} />
+                    <Note 
+                        key={note.id} 
+                        note={note}
+                        toggleImportance={() => toggleImportanceOf(note.id)}
+                    />
                 )}
             </ul>
 
